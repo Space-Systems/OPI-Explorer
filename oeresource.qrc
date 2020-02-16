@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="icons/clipboard.png">data/icons/clipboard.png</file>
+        <file alias="icons/opi_logo_host_circular.svg">data/icons/opi_logo_host_circular.svg</file>
+        <file alias="icons/orbit.png">data/icons/orbit.png</file>
+        <file alias="icons/vector.png">data/icons/vector.png</file>
+        <file alias="icons/align.png">data/icons/align.png</file>
+        <file alias="icons/add.png">data/icons/add.png</file>
+        <file alias="icons/remove.png">data/icons/remove.png</file>
+        <file alias="icons/opi_logo_plugin_square.svg">data/icons/opi_logo_plugin_square.svg</file>
+    </qresource>
+</RCC>
