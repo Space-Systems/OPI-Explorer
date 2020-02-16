@@ -633,7 +633,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
           </rect>
          </property>
          <property name="toolTip">
-          <string>The epoch that this object is currently at.</string>
+          <string>The epoch at which this dataset was created.</string>
          </property>
          <property name="inputMethodHints">
           <set>Qt::ImhFormattedNumbersOnly</set>
@@ -3560,7 +3560,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
      <x>0</x>
      <y>0</y>
      <width>1042</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
