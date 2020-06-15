@@ -242,6 +242,7 @@ void OpiExplorerMain::updateObjects()
 void OpiExplorerMain::updateWindowTitle()
 {
     QString windowTitle = "OPI Explorer";
+    windowTitle += " (OPI " + QString::number(OPI_API_VERSION_MAJOR) + "." + QString::number(OPI_API_VERSION_MINOR) + ")";
     if (currentPopulationFile != "") windowTitle += " - " + currentPopulationFile;
     QWidget::setWindowTitle(windowTitle);
 }
@@ -426,7 +427,7 @@ void OpiExplorerMain::on_listPlugins_currentRowChanged(int currentRow)
         QString info;
         info  = "Name:                           " + QString(propagator->getName()) + "\n";
         info += "Author:                         " + QString(propagator->getAuthor()) + "\n";
-        info += "Requires OPI version:           " + QString::number(propagator->minimumOPIVersionRequired()) + ".0\n";
+        info += "Requires OPI version:           " + QString::number(propagator->minimumOPIVersionRequired()) + "." + QString::number(propagator->minorOPIVersionRequired()) + "\n";
         info += "Requires CUDA:                  " + (propagator->requiresCUDA() ? QString("Yes") : QString("No")) + "\n";
         info += "Requires OpenCL:                " + (propagator->requiresOpenCL() ? QString("Yes") : QString("No")) + "\n";
         info += "Supports state vectors:         " + (propagator->cartesianCoordinates() ? QString("Yes") : QString("No")) + "\n";
