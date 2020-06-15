@@ -6,6 +6,7 @@
 
 #include "glcanvas.h"
 
+#define OPI_DISABLE_OPENCL //Not required for host
 #include "OPI/opi_cpp.h"
 
 namespace Ui {
