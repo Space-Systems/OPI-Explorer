@@ -285,6 +285,8 @@ private slots:
 
     void on_btnClearPlot_clicked();
 
+    void on_btnSavePlots_clicked();
+
 private:
     const int precision = 15;
 
@@ -301,10 +303,7 @@ private:
     QVector<QLineEdit*> covBoxes;
     QVector<QLineEdit*> covBoxesLowerTriangular;
 
-    QtCharts::QChartView* cvSMA;
-    QtCharts::QChartView* cvEcc;
-    QtCharts::QChartView* cvInc;
-    QtCharts::QChartView* cvRAAN;
+    QVector<QtCharts::QChartView*> plotViews;
 
     void loadPlugins(QString pluginFolder);
     void pasteState(int editBoxIndex);

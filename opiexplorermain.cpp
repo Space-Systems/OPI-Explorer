@@ -70,25 +70,17 @@ OpiExplorerMain::OpiExplorerMain(QWidget *parent) :
 
     QVBoxLayout* plotGrid = new QVBoxLayout();
 
-    cvSMA = new QChartView();
-    cvEcc = new QChartView();
-    cvInc = new QChartView();
-    cvRAAN = new QChartView();
-    cvSMA->setRubberBand(QChartView::RectangleRubberBand);
-    cvEcc->setRubberBand(QChartView::RectangleRubberBand);
-    cvInc->setRubberBand(QChartView::RectangleRubberBand);
-    cvRAAN->setRubberBand(QChartView::RectangleRubberBand);
-    cvSMA->setMinimumHeight(240);
-    cvEcc->setMinimumHeight(240);
-    cvInc->setMinimumHeight(240);
-    cvRAAN->setMinimumHeight(240);
-    plotGrid->addWidget(cvSMA);
-    plotGrid->addWidget(cvEcc);
-    plotGrid->addWidget(cvInc);
-    plotGrid->addWidget(cvRAAN);
+    int numPlots = 5;
+    for (int i=0; i<numPlots; i++)
+    {
+        plotViews.push_back(new QChartView);
+        plotViews[i]->setRubberBand(QChartView::RectangleRubberBand);
+        plotViews[i]->setMinimumHeight(240);
+        plotGrid->addWidget(plotViews[i]);
+    }
 
     ui->scrollAreaWidgetContents->setLayout(plotGrid);
-    ui->scrollAreaWidgetContents->setMinimumHeight(960);
+    ui->scrollAreaWidgetContents->setMinimumHeight(240*numPlots);
 }
 
 OpiExplorerMain::~OpiExplorerMain()
@@ -762,25 +754,22 @@ void OpiExplorerMain::on_btnPropagate_clicked()
         selectedPropagator->enable();
         bool plot = (ui->chkPlot->checkState() == Qt::Checked);
         QList<QListWidgetItem*> items = ui->listObjects->selectedItems();
-        QLineSeries* lsSMA[items.size()];
-        QLineSeries* lsEcc[items.size()];
-        QLineSeries* lsInc[items.size()];
-        QLineSeries* lsRAAN[items.size()];
+        QVector<QVector<QLineSeries*>> series;
+        series.resize(plotViews.size());
+        for (int s=0; s<plotViews.size(); s++) series[s].resize(items.size());
         if (plot)
         {
             for (int s=0; s<items.size(); s++)
             {
-                lsSMA[s] = new QLineSeries();
-                lsEcc[s] = new QLineSeries();
-                lsInc[s] = new QLineSeries();
-                lsRAAN[s] = new QLineSeries();
+                for (int t=0; t<plotViews.size(); t++) series[t][s] = new QLineSeries();
                 int index = ui->listObjects->row(items[s]);
                 int id = currentPopulation->getObjectProperties()[index].id;
-                QString name = QString(currentPopulation->getObjectName(index)) + " (" + QString::number(id) + ")";
-                lsSMA[s]->setName("Semi Major Axis: "+name);
-                lsEcc[s]->setName("Eccentricity: "+name);
-                lsInc[s]->setName("Inclination: "+name);
-                lsRAAN[s]->setName("Right Ascension: "+name);
+                QString name = QString(currentPopulation->getObjectName(index)) + " (" + QString::number(id) + ")";                
+                series[0][s]->setName("Semi Major Axis: "+name);
+                series[1][s]->setName("Eccentricity: "+name);
+                series[2][s]->setName("Inclination: "+name);
+                series[3][s]->setName("Right Ascension: "+name);
+                series[4][s]->setName("Perigee Height: "+name);
             }
         }
         for (int i=0; i<numSteps; i++)
@@ -790,36 +779,36 @@ void OpiExplorerMain::on_btnPropagate_clicked()
             qApp->processEvents();
             if (progress.wasCanceled()) break;
             selectedPropagator->propagate(*currentPopulation, timeStep, dt, mode);
+
             if (plot)
             {
                 for (int s=0; s<items.size(); s++)
                 {
                     int index = ui->listObjects->row(items[s]);
-                    currentPopulation->convertStateVectorsToOrbits();
+                    if (OPI::isZero(currentPopulation->getOrbit()[0])) currentPopulation->convertStateVectorsToOrbits();
                     double epoch = (mode == OPI::MODE_INDIVIDUAL_EPOCHS) ? currentPopulation->getEpoch()[index].current_epoch : timeStep + dt/86400.0;
                     OPI::Orbit orbit = currentPopulation->getOrbit()[index];
-                    lsSMA[s]->append(epoch, orbit.semi_major_axis);
-                    lsEcc[s]->append(epoch, orbit.eccentricity);
-                    lsInc[s]->append(epoch, orbit.inclination);
-                    lsRAAN[s]->append(epoch, orbit.raan);
+                    double perigeeHeight = orbit.semi_major_axis * (1.0 - orbit.eccentricity) - 6378.1363;
+                    series[0][s]->append(epoch, orbit.semi_major_axis);
+                    series[1][s]->append(epoch, orbit.eccentricity);
+                    series[2][s]->append(epoch, orbit.inclination);
+                    series[3][s]->append(epoch, orbit.raan);
+                    series[4][s]->append(epoch, perigeeHeight);
                 }
             }
+
         }
         selectedPropagator->disable();
+
         if (plot)
         {
-            for (int s=0; s<items.size(); s++)
+            for (int t=0; t<plotViews.size(); t++)
             {
-                cvSMA->chart()->addSeries(lsSMA[s]);
-                cvEcc->chart()->addSeries(lsEcc[s]);
-                cvInc->chart()->addSeries(lsInc[s]);
-                cvRAAN->chart()->addSeries(lsRAAN[s]);
+                for (int s=0; s<items.size(); s++) plotViews[t]->chart()->addSeries(series[t][s]);
+                plotViews[t]->chart()->createDefaultAxes();
             }
-            cvSMA->chart()->createDefaultAxes();
-            cvEcc->chart()->createDefaultAxes();
-            cvInc->chart()->createDefaultAxes();
-            cvRAAN->chart()->createDefaultAxes();
         }
+
         updateObjects();        
     }
 }
@@ -1836,8 +1825,15 @@ void OpiExplorerMain::on_cmbRefFrame_currentIndexChanged(int index)
 
 void OpiExplorerMain::on_btnClearPlot_clicked()
 {
-    cvSMA->chart()->removeAllSeries();
-    cvEcc->chart()->removeAllSeries();
-    cvInc->chart()->removeAllSeries();
-    cvRAAN->chart()->removeAllSeries();
+    for (int i=0; i<plotViews.size(); i++) plotViews[i]->chart()->removeAllSeries();
+}
+
+void OpiExplorerMain::on_btnSavePlots_clicked()
+{
+    QString saveFile = QFileDialog::getSaveFileName(this, "Save Plots", "", "PNG (*.png)");
+    if (saveFile != "")
+    {
+        QPixmap p = ui->scrollAreaWidgetContents->grab();
+        p.save(saveFile);
+    }
 }

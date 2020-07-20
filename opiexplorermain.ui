@@ -3336,13 +3336,26 @@ If the list is empty, select a plugin folder using the main menu.</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>541</y>
-        <width>80</width>
+        <y>540</y>
+        <width>91</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
        <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnSavePlots">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>540</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Save Plots...</string>
       </property>
      </widget>
     </widget>
