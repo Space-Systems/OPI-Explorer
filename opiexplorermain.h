@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
+#include <QtCharts/QChartView>
 
 #include "glcanvas.h"
 
@@ -282,6 +283,8 @@ private slots:
 
     void on_leEpochOriginal_textChanged(const QString &arg1);
 
+    void on_btnClearPlot_clicked();
+
 private:
     const int precision = 15;
 
@@ -297,6 +300,11 @@ private:
     QVector<QLineEdit*> inputBoxes;
     QVector<QLineEdit*> covBoxes;
     QVector<QLineEdit*> covBoxesLowerTriangular;
+
+    QtCharts::QChartView* cvSMA;
+    QtCharts::QChartView* cvEcc;
+    QtCharts::QChartView* cvInc;
+    QtCharts::QChartView* cvRAAN;
 
     void loadPlugins(QString pluginFolder);
     void pasteState(int editBoxIndex);

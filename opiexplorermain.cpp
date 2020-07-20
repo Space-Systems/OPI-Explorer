@@ -11,6 +11,9 @@
 #include <QProgressDialog>
 #include <QTextStream>
 #include <QDebug>
+#include <QtCharts/QLineSeries>
+
+using namespace QtCharts;
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -63,6 +66,29 @@ OpiExplorerMain::OpiExplorerMain(QWidget *parent) :
     QSettings settings("opi-explorer.ini", QSettings::NativeFormat);
     ui->dtStartTime->setDateTime(QDateTime::fromString(settings.value("lastStartDate").toString()));
     ui->dtEndTime->setDateTime(QDateTime::fromString(settings.value("lastEndDate").toString()));
+
+
+    QVBoxLayout* plotGrid = new QVBoxLayout();
+
+    cvSMA = new QChartView();
+    cvEcc = new QChartView();
+    cvInc = new QChartView();
+    cvRAAN = new QChartView();
+    cvSMA->setRubberBand(QChartView::RectangleRubberBand);
+    cvEcc->setRubberBand(QChartView::RectangleRubberBand);
+    cvInc->setRubberBand(QChartView::RectangleRubberBand);
+    cvRAAN->setRubberBand(QChartView::RectangleRubberBand);
+    cvSMA->setMinimumHeight(240);
+    cvEcc->setMinimumHeight(240);
+    cvInc->setMinimumHeight(240);
+    cvRAAN->setMinimumHeight(240);
+    plotGrid->addWidget(cvSMA);
+    plotGrid->addWidget(cvEcc);
+    plotGrid->addWidget(cvInc);
+    plotGrid->addWidget(cvRAAN);
+
+    ui->scrollAreaWidgetContents->setLayout(plotGrid);
+    ui->scrollAreaWidgetContents->setMinimumHeight(960);
 }
 
 OpiExplorerMain::~OpiExplorerMain()
@@ -718,6 +744,29 @@ void OpiExplorerMain::on_btnPropagate_clicked()
         progress.setRange(0, numSteps);
         progress.setModal(true);
         selectedPropagator->enable();
+        bool plot = (ui->chkPlot->checkState() == Qt::Checked);
+        QList<QListWidgetItem*> items = ui->listObjects->selectedItems();
+        QLineSeries* lsSMA[items.size()];
+        QLineSeries* lsEcc[items.size()];
+        QLineSeries* lsInc[items.size()];
+        QLineSeries* lsRAAN[items.size()];
+        if (plot)
+        {
+            for (int s=0; s<items.size(); s++)
+            {
+                lsSMA[s] = new QLineSeries();
+                lsEcc[s] = new QLineSeries();
+                lsInc[s] = new QLineSeries();
+                lsRAAN[s] = new QLineSeries();
+                int index = ui->listObjects->row(items[s]);
+                int id = currentPopulation->getObjectProperties()[index].id;
+                QString name = QString(currentPopulation->getObjectName(index)) + " (" + QString::number(id) + ")";
+                lsSMA[s]->setName("Semi Major Axis: "+name);
+                lsEcc[s]->setName("Eccentricity: "+name);
+                lsInc[s]->setName("Inclination: "+name);
+                lsRAAN[s]->setName("Right Ascension: "+name);
+            }
+        }
         for (int i=0; i<numSteps; i++)
         {
             double timeStep = jdStart+((i*dt)/86400.0);
@@ -725,9 +774,37 @@ void OpiExplorerMain::on_btnPropagate_clicked()
             qApp->processEvents();
             if (progress.wasCanceled()) break;
             selectedPropagator->propagate(*currentPopulation, timeStep, dt, mode);
+            if (plot)
+            {
+                for (int s=0; s<items.size(); s++)
+                {
+                    int index = ui->listObjects->row(items[s]);
+                    currentPopulation->convertStateVectorsToOrbits();
+                    double epoch = (mode == OPI::MODE_INDIVIDUAL_EPOCHS) ? currentPopulation->getEpoch()[index].current_epoch : timeStep + dt/86400.0;
+                    OPI::Orbit orbit = currentPopulation->getOrbit()[index];
+                    lsSMA[s]->append(epoch, orbit.semi_major_axis);
+                    lsEcc[s]->append(epoch, orbit.eccentricity);
+                    lsInc[s]->append(epoch, orbit.inclination);
+                    lsRAAN[s]->append(epoch, orbit.raan);
+                }
+            }
         }
         selectedPropagator->disable();
-        updateObjects();
+        if (plot)
+        {
+            for (int s=0; s<items.size(); s++)
+            {
+                cvSMA->chart()->addSeries(lsSMA[s]);
+                cvEcc->chart()->addSeries(lsEcc[s]);
+                cvInc->chart()->addSeries(lsInc[s]);
+                cvRAAN->chart()->addSeries(lsRAAN[s]);
+            }
+            cvSMA->chart()->createDefaultAxes();
+            cvEcc->chart()->createDefaultAxes();
+            cvInc->chart()->createDefaultAxes();
+            cvRAAN->chart()->createDefaultAxes();
+        }
+        updateObjects();        
     }
 }
 
@@ -1739,4 +1816,12 @@ void OpiExplorerMain::on_cmbRefFrame_currentIndexChanged(int index)
             ui->cmbRefFrame->blockSignals(false);
         }
     }
+}
+
+void OpiExplorerMain::on_btnClearPlot_clicked()
+{
+    cvSMA->chart()->removeAllSeries();
+    cvEcc->chart()->removeAllSeries();
+    cvInc->chart()->removeAllSeries();
+    cvRAAN->chart()->removeAllSeries();
 }
