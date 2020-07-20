@@ -458,6 +458,7 @@ void OpiExplorerMain::on_listPlugins_currentRowChanged(int currentRow)
         info += "Requires OpenCL:                " + (propagator->requiresOpenCL() ? QString("Yes") : QString("No")) + "\n";
         info += "Supports state vectors:         " + (propagator->cartesianCoordinates() ? QString("Yes") : QString("No")) + "\n";
         info += "Supports backwards propagation: " + (propagator->backwardPropagation() ? QString("Yes") : QString("No")) + "\n";
+        info += "Supports OPI Logger:            " + (propagator->supportsOPILogger() ? QString("Yes") : QString("No")) + "\n";
         info += "Reference frame:                " + refFrameToString(propagator->referenceFrame()) + "\n";
         info += "\n" + QString(propagator->getDescription()) + "\n";
         ui->lblPropInfo->setText(info);
