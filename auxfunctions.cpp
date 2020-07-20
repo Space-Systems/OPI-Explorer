@@ -45,7 +45,7 @@ double AuxFunctions::dateStringToJulian(QString dateString)
     return julianDate;
 }
 
-QString AuxFunctions::timeStringFromJulianDay(double julianDay)
+QDateTime AuxFunctions::qDateTimeFromJulianDay(double julianDay)
 {
     qint64 jd = (qint64)(qRound(julianDay));
     QDate date = QDate::fromJulianDay(jd);
@@ -54,5 +54,10 @@ QString AuxFunctions::timeStringFromJulianDay(double julianDay)
     int msecs = (jdfraction * 24.0 * 1000.0) * 3600;
     QTime time = QTime::fromMSecsSinceStartOfDay(msecs);
     QDateTime datetime(date, time);
-    return datetime.toString("yyyy-MM-ddTHH:mm:ss");
+    return datetime;
+}
+
+QString AuxFunctions::timeStringFromJulianDay(double julianDay)
+{    
+    return qDateTimeFromJulianDay(julianDay).toString("yyyy-MM-ddTHH:mm:ss");
 }

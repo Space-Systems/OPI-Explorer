@@ -314,6 +314,7 @@ private:
     void resetInputBoxes();
     void updateWindowTitle();
     int diagonalIndex(int i);
+    void setStartEndDate();
 };
 
 #endif // OPIPOPIMAIN_H

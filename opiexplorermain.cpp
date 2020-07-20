@@ -173,6 +173,7 @@ void OpiExplorerMain::on_actionLoad_Population_triggered()
         updateObjects();
         ui->tabsMain->setTabText(0, "Population");
         ui->actionReset_to_Saved_State->setEnabled(true);
+        setStartEndDate();
     }
     updateWindowTitle();
 }
@@ -194,6 +195,7 @@ void OpiExplorerMain::on_actionLoad_with_Plugin_triggered()
             updateObjects();
             ui->tabsMain->setTabText(0, "Population");
             ui->actionReset_to_Saved_State->setEnabled(false);
+            setStartEndDate();
         }
     }
     updateWindowTitle();
@@ -227,8 +229,21 @@ void OpiExplorerMain::on_actionLoad_and_Append_triggered()
             *currentPopulation += additionalObjects;
             updateObjects();
         }
+        setStartEndDate();
     }
     updateWindowTitle();
+}
+
+void OpiExplorerMain::setStartEndDate()
+{
+    AuxFunctions aux;
+    double current = currentPopulation->getEarliestEpoch();
+    if (current > 0)
+    {
+        QDateTime t = aux.qDateTimeFromJulianDay(current);
+        ui->dtStartTime->setDateTime(t);
+        ui->dtEndTime->setDateTime(t.addDays(7));
+    }
 }
 
 void OpiExplorerMain::updateObjects()

@@ -11,6 +11,7 @@ public:
     AuxFunctions();
     double dateStringToJulian(QString dateString);
     QString timeStringFromJulianDay(double julianDay);
+    QDateTime qDateTimeFromJulianDay(double julianDay);
 };
 
 #endif // AUXFUNCTIONS_H
