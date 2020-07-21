@@ -1142,6 +1142,7 @@ void OpiExplorerMain::on_actionReset_to_Saved_State_triggered()
 {
     if (currentPopulationFile != "" && currentPopulationFile.endsWith(".opi"))
     {
+        delete currentPopulation;
         currentPopulation = new OPI::Population(host,0);
         currentPopulation->read(currentPopulationFile.toStdString().c_str());
         updateObjects();
