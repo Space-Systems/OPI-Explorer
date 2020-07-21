@@ -40,7 +40,7 @@ OpiExplorerMain::OpiExplorerMain(QWidget *parent) :
     ui->listObjects->setFocus();
 #ifdef ENABLE_OPENGL
     gl = new GLCanvas(ui->glCanvas);
-    gl->setMinimumSize(491, 141);
+    gl->setMinimumSize(531, 141);
 #endif
 
     inputBoxes = {ui->leStateX, ui->leStateY, ui->leStateZ, ui->leStateXdot, ui->leStateYdot, ui->leStateZdot,
@@ -1185,8 +1185,6 @@ void OpiExplorerMain::on_actionOpen_Data_Parser_triggered()
         currentPopulation = new OPI::Population(*dataParser->getPopulation());
         updateObjects();
     }
-
-
 }
 
 void OpiExplorerMain::on_btnAlign_clicked()
