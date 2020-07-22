@@ -86,7 +86,7 @@ void DataParser::on_btnAnalyse_clicked()
         population->getObjectProperties()[l] = {0.0,0.0,0.0,0.0,0.0,0};
         population->getPosition()[l] = {0.0,0.0,0.0};
         population->getVelocity()[l] = {0.0,0.0,0.0};
-        population->getEpoch()[l] = {0.0,0.0,0.0,0.0};
+        population->getEpoch()[l] = {0.0,0.0,0.0,0.0,0.0};
         population->getAcceleration()[l] = {0.0,0.0,0.0};
 
         QStringList items = lines[l].split(separator);

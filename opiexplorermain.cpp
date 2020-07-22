@@ -46,7 +46,7 @@ OpiExplorerMain::OpiExplorerMain(QWidget *parent) :
     inputBoxes = {ui->leStateX, ui->leStateY, ui->leStateZ, ui->leStateXdot, ui->leStateYdot, ui->leStateZdot,
                   ui->lePropsID, ui->lePropsMass, ui->lePropsDia, ui->lePropsA2M, ui->lePropsDrag, ui->lePropsReflectivity,
                   ui->leOrbitSMA, ui->leOrbitEcc, ui->leOrbitInc, ui->leOrbitRAAN, ui->leOrbitAOP, ui->leOrbitMA,
-                  ui->leEpochBOL, ui->leEpochEOL, ui->leEpochCurrent, ui->leEpochOriginal, ui->leObjectName, ui->leAccX, ui->leAccY, ui->leAccZ
+                  ui->leEpochBOL, ui->leEpochEOL, ui->leEpochCurrent, ui->leEpochOriginal, ui->leEpochInitial, ui->leObjectName, ui->leAccX, ui->leAccY, ui->leAccZ
                  };
     covBoxes = {ui->leCov_0,  ui->leCov_1,  ui->leCov_2,  ui->leCov_3,  ui->leCov_4,  ui->leCov_5,  ui->leCov_6,  ui->leCov_7,
                 ui->leCov_8,  ui->leCov_9,  ui->leCov_10, ui->leCov_11, ui->leCov_12, ui->leCov_13, ui->leCov_14, ui->leCov_15,
@@ -302,20 +302,24 @@ void OpiExplorerMain::pasteState(int editBoxIndex)
         {
             if (editBoxIndex < 3)
             {
+                // Position
                 for (int i=0; i<std::min(6,split.size()); i++) { inputBoxes[i]->setText(split[i]); inputBoxes[i]->editingFinished(); }
             }
             else if (editBoxIndex < 6)
             {
+                //Velocity
                 if (split.size() == 3) for (int i=0; i<split.size(); i++) { inputBoxes[3+i]->setText(split[i]); inputBoxes[3+i]->editingFinished(); }
                 else for (int i=0; i<std::min(6,split.size()); i++) { inputBoxes[i]->setText(split[i]); inputBoxes[i]->editingFinished(); }
             }
             else if (editBoxIndex >= 12 && editBoxIndex <= 17)
             {
+                // Orbit
                 if (split.size() == 6) for (int i=0; i<split.size(); i++) { inputBoxes[12+i]->setText(split[i]); inputBoxes[12+i]->editingFinished(); }
             }
-            else if (editBoxIndex >= 18 && editBoxIndex <= 21)
+            else if (editBoxIndex >= 18 && editBoxIndex <= 22)
             {
-                if (split.size() == 4) for (int i=0; i<split.size(); i++) { inputBoxes[18+i]->setText(split[i]); inputBoxes[18+i]->editingFinished(); }
+                // Epoch
+                if (split.size() == 5) for (int i=0; i<split.size(); i++) { inputBoxes[18+i]->setText(split[i]); inputBoxes[18+i]->editingFinished(); }
             }
         }
     }
@@ -346,6 +350,7 @@ void OpiExplorerMain::on_listObjects_currentRowChanged(int currentRow)
         ui->leEpochEOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].end_of_life,'g',precision));
         ui->leEpochCurrent->setText(QString::number(currentPopulation->getEpoch()[currentRow].current_epoch,'g',precision));
         ui->leEpochOriginal->setText(QString::number(currentPopulation->getEpoch()[currentRow].original_epoch,'g',precision));
+        ui->leEpochInitial->setText(QString::number(currentPopulation->getEpoch()[currentRow].initial_epoch,'g',precision));
 
         ui->leAccX->setText(QString::number(currentPopulation->getAcceleration()[currentRow].x,'g',precision));
         ui->leAccY->setText(QString::number(currentPopulation->getAcceleration()[currentRow].y,'g',precision));
@@ -899,6 +904,15 @@ void OpiExplorerMain::on_leEpochOriginal_editingFinished()
     }
 }
 
+void OpiExplorerMain::on_leEpochInitial_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].initial_epoch = ui->leEpochInitial->text().toDouble();
+    }
+}
+
 void OpiExplorerMain::on_leAccX_editingFinished()
 {
     if (validObjectSelected())
@@ -1047,7 +1061,6 @@ void OpiExplorerMain::on_leEpochEOL_textChanged(const QString &arg1)
     pasteState(19);
 }
 
-
 void OpiExplorerMain::on_leEpochCurrent_textChanged(const QString &arg1)
 {
     pasteState(20);
@@ -1058,24 +1071,29 @@ void OpiExplorerMain::on_leEpochOriginal_textChanged(const QString &arg1)
     pasteState(21);
 }
 
-void OpiExplorerMain::on_leObjectName_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leEpochInitial_textChanged(const QString &arg1)
 {
     pasteState(22);
 }
 
-void OpiExplorerMain::on_leAccX_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leObjectName_textChanged(const QString &arg1)
 {
     pasteState(23);
 }
 
-void OpiExplorerMain::on_leAccY_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leAccX_textChanged(const QString &arg1)
 {
     pasteState(24);
 }
 
-void OpiExplorerMain::on_leAccZ_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leAccY_textChanged(const QString &arg1)
 {
     pasteState(25);
+}
+
+void OpiExplorerMain::on_leAccZ_textChanged(const QString &arg1)
+{
+    pasteState(26);
 }
 
 
@@ -1123,7 +1141,11 @@ void OpiExplorerMain::on_btnCopyEpoch_clicked()
     {
         QClipboard* clip = QApplication::clipboard();
         OPI::Epoch e = currentPopulation->getEpoch()[ui->listObjects->currentRow()];
-        QString text = QString::number(e.beginning_of_life,'g',precision) + " " + QString::number(e.end_of_life,'g',precision) + " " + QString::number(e.current_epoch,'g',precision);
+        QString text = QString::number(e.beginning_of_life,'g',precision)
+                + " " + QString::number(e.end_of_life,'g',precision)
+                + " " + QString::number(e.current_epoch,'g',precision)
+                + " " + QString::number(e.original_epoch,'g',precision)
+                + " " + QString::number(e.initial_epoch,'g',precision);
         clip->setText(text);
     }
 }
@@ -1836,3 +1858,4 @@ void OpiExplorerMain::on_btnSavePlots_clicked()
         p.save(saveFile);
     }
 }
+

@@ -287,6 +287,10 @@ private slots:
 
     void on_btnSavePlots_clicked();
 
+    void on_leEpochInitial_editingFinished();
+
+    void on_leEpochInitial_textChanged(const QString &arg1);
+
 private:
     const int precision = 15;
 

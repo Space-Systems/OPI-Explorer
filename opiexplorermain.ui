@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1042</width>
-    <height>836</height>
+    <height>864</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,14 +27,14 @@
       <x>10</x>
       <y>10</y>
       <width>1021</width>
-      <height>611</height>
+      <height>651</height>
      </rect>
     </property>
     <property name="toolTip">
      <string/>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -49,7 +49,7 @@
         <x>10</x>
         <y>10</y>
         <width>161</width>
-        <height>561</height>
+        <height>601</height>
        </rect>
       </property>
       <property name="toolTip">
@@ -201,7 +201,7 @@
         <x>230</x>
         <y>10</y>
         <width>781</width>
-        <height>561</height>
+        <height>601</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -220,7 +220,7 @@
           <x>400</x>
           <y>240</y>
           <width>371</width>
-          <height>281</height>
+          <height>321</height>
          </rect>
         </property>
         <property name="title">
@@ -472,7 +472,7 @@
           <x>10</x>
           <y>240</y>
           <width>371</width>
-          <height>151</height>
+          <height>191</height>
          </rect>
         </property>
         <property name="title">
@@ -653,6 +653,38 @@ Propagators will set EOL when an object decays and disregard it after that date.
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_44">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>150</y>
+           <width>141</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Initial Epoch [JD]</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochInitial">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>150</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at the start of propagation</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
          </property>
         </widget>
        </widget>
@@ -1142,7 +1174,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>400</y>
+          <y>440</y>
           <width>371</width>
           <height>121</height>
          </rect>
@@ -1252,7 +1284,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
           <x>10</x>
           <y>320</y>
           <width>721</width>
-          <height>171</height>
+          <height>241</height>
          </rect>
         </property>
         <property name="title">
@@ -1264,7 +1296,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
            <x>10</x>
            <y>30</y>
            <width>701</width>
-           <height>131</height>
+           <height>201</height>
           </rect>
          </property>
          <property name="toolTip">
@@ -3097,7 +3129,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <rect>
           <x>370</x>
           <y>10</y>
-          <width>351</width>
+          <width>401</width>
           <height>481</height>
          </rect>
         </property>
@@ -3109,7 +3141,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
           <rect>
            <x>10</x>
            <y>30</y>
-           <width>331</width>
+           <width>381</width>
            <height>441</height>
           </rect>
          </property>
@@ -3166,7 +3198,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <x>10</x>
         <y>10</y>
         <width>161</width>
-        <height>561</height>
+        <height>601</height>
        </rect>
       </property>
       <property name="toolTip">
@@ -3186,7 +3218,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
         <x>180</x>
         <y>270</y>
         <width>791</width>
-        <height>301</height>
+        <height>341</height>
        </rect>
       </property>
       <property name="title">
@@ -3198,7 +3230,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
          <x>10</x>
          <y>30</y>
          <width>771</width>
-         <height>231</height>
+         <height>271</height>
         </rect>
        </property>
       </widget>
@@ -3206,7 +3238,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
        <property name="geometry">
         <rect>
          <x>480</x>
-         <y>270</y>
+         <y>310</y>
          <width>301</width>
          <height>25</height>
         </rect>
@@ -3216,7 +3248,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>270</y>
+         <y>310</y>
          <width>461</width>
          <height>21</height>
         </rect>
@@ -3275,7 +3307,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
         <x>10</x>
         <y>10</y>
         <width>961</width>
-        <height>521</height>
+        <height>561</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -3286,7 +3318,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>540</y>
+        <y>580</y>
         <width>71</width>
         <height>31</height>
        </rect>
@@ -3306,7 +3338,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
         <x>10</x>
         <y>10</y>
         <width>1001</width>
-        <height>521</height>
+        <height>561</height>
        </rect>
       </property>
       <property name="verticalScrollBarPolicy">
@@ -3320,8 +3352,8 @@ If the list is empty, select a plugin folder using the main menu.</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>986</width>
-         <height>519</height>
+         <width>988</width>
+         <height>559</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -3336,7 +3368,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>540</y>
+        <y>580</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -3349,7 +3381,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
       <property name="geometry">
        <rect>
         <x>110</x>
-        <y>540</y>
+        <y>580</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -3367,7 +3399,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>630</y>
+      <y>670</y>
       <width>481</width>
       <height>141</height>
      </rect>
@@ -3620,7 +3652,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>630</y>
+      <y>670</y>
       <width>531</width>
       <height>141</height>
      </rect>
@@ -3636,7 +3668,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
      <x>0</x>
      <y>0</y>
      <width>1042</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
