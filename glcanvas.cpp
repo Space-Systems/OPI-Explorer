@@ -128,7 +128,7 @@ void GLCanvas::mouseReleaseEvent(QMouseEvent* event)
 void GLCanvas::drawObject(OPI::Vector3 pos)
 {
     glPushMatrix();
-    glTranslatef(pos.x, pos.y, pos.z);
+    //glTranslated(pos.x, pos.y, pos.z);
     glScalef(0.3,0.3,0.3);
     //satellite.draw();
     glPopMatrix();
