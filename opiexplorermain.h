@@ -112,9 +112,9 @@ private slots:
 
     void on_leObjectName_editingFinished();
 
-    void on_leEpochBOL_editingFinished();
+    void on_leEpochDoubleBOL_editingFinished();
 
-    void on_leEpochEOL_editingFinished();
+    void on_leEpochDoubleEOL_editingFinished();
 
     void on_leAccX_editingFinished();
 
@@ -172,7 +172,7 @@ private slots:
 
     void on_actionReset_to_Saved_State_triggered();
 
-    void on_leEpochCurrent_editingFinished();
+    void on_leEpochDoubleCurrent_editingFinished();
 
     void on_leEpochCurrent_textChanged(const QString &arg1);
 
@@ -279,7 +279,7 @@ private slots:
 
     void on_cmbRefFrame_currentIndexChanged(int index);
 
-    void on_leEpochOriginal_editingFinished();
+    void on_leEpochDoubleOriginal_editingFinished();
 
     void on_leEpochOriginal_textChanged(const QString &arg1);
 
@@ -287,9 +287,19 @@ private slots:
 
     void on_btnSavePlots_clicked();
 
-    void on_leEpochInitial_editingFinished();
+    void on_leEpochDoubleInitial_editingFinished();
 
     void on_leEpochInitial_textChanged(const QString &arg1);
+
+    void on_leEpochStringBOL_editingFinished();
+
+    void on_leEpochStringEOL_editingFinished();
+
+    void on_leEpochStringCurrent_editingFinished();
+
+    void on_leEpochStringOriginal_editingFinished();
+
+    void on_leEpochStringInitial_editingFinished();
 
 private:
     const int precision = 15;

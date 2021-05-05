@@ -9,25 +9,6 @@ AuxFunctions::AuxFunctions()
 
 double AuxFunctions::dateStringToJulian(QString dateString)
 {
-    const std::vector<QString> dateFormats = {
-        "yyyy-MM-dd",
-        "yyyy/MM/dd",
-        "yyyy-M-d",
-        "yyyy/M/d",
-        "dd-MM-yyyy",
-        "dd/MM/yyyy",
-        "d-M-yyyy",
-        "d/M/yyyy"
-    };
-    const std::vector<QString> timeFormats = {
-      "THH:mm:ss.zzz",
-      " HH:mm:ss.zzz",
-      "THH:mm:ss.zzz000",
-      " HH:mm:ss.zzz000",
-      "THH:mm:ss",
-      " HH:mm:ss",
-      ""
-    };
     double julianDate = 0.0;
     QDateTime date;
     for (int df=0; df<dateFormats.size(); df++)
@@ -45,6 +26,7 @@ double AuxFunctions::dateStringToJulian(QString dateString)
     return julianDate;
 }
 
+/*
 QDateTime AuxFunctions::qDateTimeFromJulianDay(double julianDay)
 {
     qint64 jd = (qint64)(qRound(julianDay));
@@ -59,5 +41,46 @@ QDateTime AuxFunctions::qDateTimeFromJulianDay(double julianDay)
 
 QString AuxFunctions::timeStringFromJulianDay(double julianDay)
 {    
+    return qDateTimeFromJulianDay(julianDay).toString("yyyy-MM-ddTHH:mm:ss");
+}
+*/
+
+OPI::JulianDay AuxFunctions::dateStringToOPIJulian(QString dateString)
+{
+    OPI::JulianDay julianDate = {0,0};
+    QDateTime date;
+    for (int df=0; df<dateFormats.size(); df++)
+    {
+        for (int tf=0; tf<timeFormats.size(); tf++)
+        {
+            QString format = dateFormats[df]+timeFormats[tf];
+            date = QDateTime::fromString(dateString,format);
+            if (date.isValid()) {
+                julianDate = qDateTimeToOPIJulian(date);
+                break;
+            }
+        }
+    }
+    return julianDate;
+}
+
+OPI::JulianDay AuxFunctions::qDateTimeToOPIJulian(QDateTime date)
+{
+    OPI::JulianDay result = { (int)date.date().toJulianDay(), (long long)(date.time().msecsSinceStartOfDay()) * 1000 };
+    result -= 43200000000l;
+    return result;
+}
+
+QDateTime AuxFunctions::qDateTimeFromJulianDay(OPI::JulianDay julianDay)
+{
+    julianDay += 43200000000l;
+    QDate date = QDate::fromJulianDay(julianDay.day);
+    QTime time = QTime::fromMSecsSinceStartOfDay(julianDay.usec / 1000);
+    QDateTime datetime(date, time);
+    return datetime;
+}
+
+QString AuxFunctions::timeStringFromJulianDay(OPI::JulianDay julianDay)
+{
     return qDateTimeFromJulianDay(julianDay).toString("yyyy-MM-ddTHH:mm:ss");
 }

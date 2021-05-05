@@ -86,7 +86,7 @@ void DataParser::on_btnAnalyse_clicked()
         population->getObjectProperties()[l] = {0.0,0.0,0.0,0.0,0.0,0};
         population->getPosition()[l] = {0.0,0.0,0.0};
         population->getVelocity()[l] = {0.0,0.0,0.0};
-        population->getEpoch()[l] = {0.0,0.0,0.0,0.0,0.0};
+        population->getEpoch()[l] = {{0,0},{0,0},{0,0},{0,0},{0,0}};
         population->getAcceleration()[l] = {0.0,0.0,0.0};
 
         QStringList items = lines[l].split(separator);
@@ -190,8 +190,8 @@ void DataParser::on_btnAnalyse_clicked()
             }
             else if (identifiers[i] == "%ep")
             {
-                population->getEpoch()[l].current_epoch = aux.dateStringToJulian(items[i]);
-                parsedText += "ep = " + QString::number(population->getEpoch()[l].current_epoch) + ", ";
+                population->getEpoch()[l].current_epoch = aux.dateStringToOPIJulian(items[i]);
+                parsedText += "ep = " + QString::number(OPI::toDouble(population->getEpoch()[l].current_epoch)) + ", ";
             }
             else if (identifiers[i] == "%x")
             {

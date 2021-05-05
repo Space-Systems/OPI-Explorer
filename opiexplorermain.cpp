@@ -46,7 +46,11 @@ OpiExplorerMain::OpiExplorerMain(QWidget *parent) :
     inputBoxes = {ui->leStateX, ui->leStateY, ui->leStateZ, ui->leStateXdot, ui->leStateYdot, ui->leStateZdot,
                   ui->lePropsID, ui->lePropsMass, ui->lePropsDia, ui->lePropsA2M, ui->lePropsDrag, ui->lePropsReflectivity,
                   ui->leOrbitSMA, ui->leOrbitEcc, ui->leOrbitInc, ui->leOrbitRAAN, ui->leOrbitAOP, ui->leOrbitMA,
-                  ui->leEpochBOL, ui->leEpochEOL, ui->leEpochCurrent, ui->leEpochOriginal, ui->leEpochInitial, ui->leObjectName, ui->leAccX, ui->leAccY, ui->leAccZ
+                  ui->leEpochDoubleBOL, ui->leEpochDoubleEOL, ui->leEpochDoubleCurrent, ui->leEpochDoubleOriginal, ui->leEpochDoubleInitial,
+                  ui->leObjectName, ui->leAccX, ui->leAccY, ui->leAccZ,
+                  ui->leEpochJDDayBOL, ui->leEpochJDDayEOL, ui->leEpochJDDayCurrent, ui->leEpochJDDayOriginal, ui->leEpochJDDayInitial,
+                  ui->leEpochJDUsecBOL, ui->leEpochJDUsecEOL, ui->leEpochJDUsecCurrent, ui->leEpochJDUsecOriginal, ui->leEpochJDUsecInitial,
+                  ui->leEpochStringBOL, ui->leEpochStringEOL, ui->leEpochStringCurrent, ui->leEpochStringOriginal, ui->leEpochStringInitial,
                  };
     covBoxes = {ui->leCov_0,  ui->leCov_1,  ui->leCov_2,  ui->leCov_3,  ui->leCov_4,  ui->leCov_5,  ui->leCov_6,  ui->leCov_7,
                 ui->leCov_8,  ui->leCov_9,  ui->leCov_10, ui->leCov_11, ui->leCov_12, ui->leCov_13, ui->leCov_14, ui->leCov_15,
@@ -229,8 +233,8 @@ void OpiExplorerMain::on_actionLoad_and_Append_triggered()
 void OpiExplorerMain::setStartEndDate()
 {
     AuxFunctions aux;
-    double current = currentPopulation->getEarliestEpoch();
-    if (current > 0)
+    OPI::JulianDay current = currentPopulation->getEarliestEpoch();
+    if (current.day > 0)
     {
         QDateTime t = aux.qDateTimeFromJulianDay(current);
         ui->dtStartTime->setDateTime(t);
@@ -240,6 +244,7 @@ void OpiExplorerMain::setStartEndDate()
 
 void OpiExplorerMain::updateObjects()
 {
+    AuxFunctions aux;
     int lastIndex = ui->listObjects->currentRow();
     ui->listObjects->clear();
     for (int i=0; i<currentPopulation->getSize(); i++)
@@ -260,11 +265,10 @@ void OpiExplorerMain::updateObjects()
         ui->listObjects->item(invalids.getData(OPI::DEVICE_HOST)[i])->setForeground(Qt::red);
     }
     if (ui->listObjects->count() > lastIndex) ui->listObjects->setCurrentRow(lastIndex);
-    const double earliestEpoch = currentPopulation->getEarliestEpoch();
-    const double latestEpoch = currentPopulation->getLatestEpoch();
-    ui->leEpochEarliest->setText(QString::number(earliestEpoch,'g',precision));
-    ui->leEpochLatest->setText(QString::number(currentPopulation->getLatestEpoch(),'g',precision));
-    AuxFunctions aux;
+    const OPI::JulianDay earliestEpoch = currentPopulation->getEarliestEpoch();
+    const OPI::JulianDay latestEpoch = currentPopulation->getLatestEpoch();
+    ui->leEpochEarliest->setText(aux.timeStringFromJulianDay(earliestEpoch));
+    ui->leEpochLatest->setText(aux.timeStringFromJulianDay(currentPopulation->getLatestEpoch()));
     ui->leEpochEarliest->setToolTip(aux.timeStringFromJulianDay(earliestEpoch));
     ui->leEpochLatest->setToolTip(aux.timeStringFromJulianDay(latestEpoch));
     ui->teDescription->setText(QString(currentPopulation->getDescription()));
@@ -327,6 +331,7 @@ void OpiExplorerMain::pasteState(int editBoxIndex)
 
 void OpiExplorerMain::on_listObjects_currentRowChanged(int currentRow)
 {
+    AuxFunctions aux;
     if (validObjectSelected())
     {
         for (int i=0; i<inputBoxes.size(); i++) inputBoxes[i]->setReadOnly(false);
@@ -346,11 +351,29 @@ void OpiExplorerMain::on_listObjects_currentRowChanged(int currentRow)
         ui->leOrbitAOP->setText(QString::number(currentPopulation->getOrbit()[currentRow].arg_of_perigee,'g',precision));
         ui->leOrbitMA->setText(QString::number(currentPopulation->getOrbit()[currentRow].mean_anomaly,'g',precision));
 
-        ui->leEpochBOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].beginning_of_life,'g',precision));
-        ui->leEpochEOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].end_of_life,'g',precision));
-        ui->leEpochCurrent->setText(QString::number(currentPopulation->getEpoch()[currentRow].current_epoch,'g',precision));
-        ui->leEpochOriginal->setText(QString::number(currentPopulation->getEpoch()[currentRow].original_epoch,'g',precision));
-        ui->leEpochInitial->setText(QString::number(currentPopulation->getEpoch()[currentRow].initial_epoch,'g',precision));
+        ui->leEpochJDDayBOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].beginning_of_life.day,'g',precision));
+        ui->leEpochJDDayEOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].end_of_life.day,'g',precision));
+        ui->leEpochJDDayCurrent->setText(QString::number(currentPopulation->getEpoch()[currentRow].current_epoch.day,'g',precision));
+        ui->leEpochJDDayOriginal->setText(QString::number(currentPopulation->getEpoch()[currentRow].original_epoch.day,'g',precision));
+        ui->leEpochJDDayInitial->setText(QString::number(currentPopulation->getEpoch()[currentRow].initial_epoch.day,'g',precision));
+
+        ui->leEpochJDUsecBOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].beginning_of_life.usec,'g',precision));
+        ui->leEpochJDUsecEOL->setText(QString::number(currentPopulation->getEpoch()[currentRow].end_of_life.usec,'g',precision));
+        ui->leEpochJDUsecCurrent->setText(QString::number(currentPopulation->getEpoch()[currentRow].current_epoch.usec,'g',precision));
+        ui->leEpochJDUsecOriginal->setText(QString::number(currentPopulation->getEpoch()[currentRow].original_epoch.usec,'g',precision));
+        ui->leEpochJDUsecInitial->setText(QString::number(currentPopulation->getEpoch()[currentRow].initial_epoch.usec,'g',precision));
+
+        ui->leEpochDoubleBOL->setText(QString::number(OPI::toDouble(currentPopulation->getEpoch()[currentRow].beginning_of_life),'g',precision));
+        ui->leEpochDoubleEOL->setText(QString::number(OPI::toDouble(currentPopulation->getEpoch()[currentRow].end_of_life),'g',precision));
+        ui->leEpochDoubleCurrent->setText(QString::number(OPI::toDouble(currentPopulation->getEpoch()[currentRow].current_epoch),'g',precision));
+        ui->leEpochDoubleOriginal->setText(QString::number(OPI::toDouble(currentPopulation->getEpoch()[currentRow].original_epoch),'g',precision));
+        ui->leEpochDoubleInitial->setText(QString::number(OPI::toDouble(currentPopulation->getEpoch()[currentRow].initial_epoch),'g',precision));
+
+        ui->leEpochStringBOL->setText(aux.timeStringFromJulianDay(currentPopulation->getEpoch()[currentRow].beginning_of_life));
+        ui->leEpochStringEOL->setText(aux.timeStringFromJulianDay(currentPopulation->getEpoch()[currentRow].end_of_life));
+        ui->leEpochStringCurrent->setText(aux.timeStringFromJulianDay(currentPopulation->getEpoch()[currentRow].current_epoch));
+        ui->leEpochStringOriginal->setText(aux.timeStringFromJulianDay(currentPopulation->getEpoch()[currentRow].original_epoch));
+        ui->leEpochStringInitial->setText(aux.timeStringFromJulianDay(currentPopulation->getEpoch()[currentRow].initial_epoch));
 
         ui->leAccX->setText(QString::number(currentPopulation->getAcceleration()[currentRow].x,'g',precision));
         ui->leAccY->setText(QString::number(currentPopulation->getAcceleration()[currentRow].y,'g',precision));
@@ -744,12 +767,11 @@ void OpiExplorerMain::on_btnPropagate_clicked()
 {
     if (currentPopulation && currentPopulation->getSize() > 0)
     {
-        QDateTime start = ui->dtStartTime->dateTime();
-        QDateTime end = ui->dtEndTime->dateTime();
-        double dt = ui->cmbDeltaT->currentText().toDouble();
-        double jdStart = start.date().toJulianDay()-0.5 + (start.time().hour()*3600.0 + start.time().minute()*60.0 + start.time().second())/86400.0;
-        double jdEnd = end.date().toJulianDay()-0.5 + (end.time().hour()*3600.0 + end.time().minute()*60.0 + end.time().second())/86400.0;
-        int numSteps = ((jdEnd-jdStart)*86400.0 / dt);
+        AuxFunctions aux;
+        long long dt = ui->cmbDeltaT->currentText().toLongLong() * 1000000;
+        OPI::JulianDay jdStart = aux.qDateTimeToOPIJulian(ui->dtStartTime->dateTime());
+        OPI::JulianDay jdEnd = aux.qDateTimeToOPIJulian(ui->dtEndTime->dateTime());
+        int numSteps = OPI::deltaUsec(jdEnd,jdStart) / dt;
         OPI::PropagationMode mode = (ui->cmbPropagatorMode->currentIndex() == 1 ? OPI::MODE_INDIVIDUAL_EPOCHS : OPI::MODE_SINGLE_EPOCH);
         OPI::Propagator* selectedPropagator = host.getPropagator(ui->listPlugins->currentRow());
         QProgressDialog progress(this);
@@ -779,7 +801,7 @@ void OpiExplorerMain::on_btnPropagate_clicked()
         }
         for (int i=0; i<numSteps; i++)
         {
-            double timeStep = jdStart+((i*dt)/86400.0);
+            OPI::JulianDay timeStep = jdStart + (i*dt);
             progress.setValue(i);
             qApp->processEvents();
             if (progress.wasCanceled()) break;
@@ -791,7 +813,7 @@ void OpiExplorerMain::on_btnPropagate_clicked()
                 {
                     int index = ui->listObjects->row(items[s]);
                     if (OPI::isZero(currentPopulation->getOrbit()[0])) currentPopulation->convertStateVectorsToOrbits();
-                    double epoch = (mode == OPI::MODE_INDIVIDUAL_EPOCHS) ? currentPopulation->getEpoch()[index].current_epoch : timeStep + dt/86400.0;
+                    double epoch = (mode == OPI::MODE_INDIVIDUAL_EPOCHS) ? OPI::toDouble(currentPopulation->getEpoch()[index].current_epoch) : OPI::toDouble(timeStep);
                     OPI::Orbit orbit = currentPopulation->getOrbit()[index];
                     double perigeeHeight = orbit.semi_major_axis * (1.0 - orbit.eccentricity) - 6378.1363;
                     series[0][s]->append(epoch, orbit.semi_major_axis);
@@ -867,49 +889,144 @@ void OpiExplorerMain::on_leObjectName_editingFinished()
     }
 }
 
-void OpiExplorerMain::on_leEpochBOL_editingFinished()
+void OpiExplorerMain::on_leEpochDoubleBOL_editingFinished()
 {
     if (validObjectSelected())
     {
-        ui->tabsMain->setTabText(0, "Population*");
-        currentPopulation->getEpoch()[ui->listObjects->currentRow()].beginning_of_life = ui->leEpochBOL->text().toDouble();
+        ui->tabsMain->setTabText(0, "Population*");        
+        AuxFunctions aux;
+        OPI::JulianDay jd = OPI::fromDouble(ui->leEpochDoubleBOL->text().toDouble());
+        ui->leEpochJDDayBOL->setText(QString::number(jd.day));
+        ui->leEpochJDUsecBOL->setText(QString::number(jd.usec));
+        ui->leEpochStringBOL->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].beginning_of_life = jd;
     }
 }
 
-void OpiExplorerMain::on_leEpochEOL_editingFinished()
+void OpiExplorerMain::on_leEpochDoubleEOL_editingFinished()
 {
     if (validObjectSelected())
     {
         ui->tabsMain->setTabText(0, "Population*");
-        currentPopulation->getEpoch()[ui->listObjects->currentRow()].end_of_life = ui->leEpochEOL->text().toDouble();
+        AuxFunctions aux;
+        OPI::JulianDay jd = OPI::fromDouble(ui->leEpochDoubleEOL->text().toDouble());
+        ui->leEpochJDDayEOL->setText(QString::number(jd.day));
+        ui->leEpochJDUsecEOL->setText(QString::number(jd.usec));
+        ui->leEpochStringEOL->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].end_of_life = jd;
     }
 }
 
 
-void OpiExplorerMain::on_leEpochCurrent_editingFinished()
+void OpiExplorerMain::on_leEpochDoubleCurrent_editingFinished()
 {
     if (validObjectSelected())
     {
         ui->tabsMain->setTabText(0, "Population*");
-        currentPopulation->getEpoch()[ui->listObjects->currentRow()].current_epoch = ui->leEpochCurrent->text().toDouble();
+        AuxFunctions aux;
+        OPI::JulianDay jd = OPI::fromDouble(ui->leEpochDoubleCurrent->text().toDouble());
+        ui->leEpochJDDayCurrent->setText(QString::number(jd.day));
+        ui->leEpochJDUsecCurrent->setText(QString::number(jd.usec));
+        ui->leEpochStringCurrent->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].current_epoch = jd;
     }
 }
 
-void OpiExplorerMain::on_leEpochOriginal_editingFinished()
+void OpiExplorerMain::on_leEpochDoubleOriginal_editingFinished()
 {
     if (validObjectSelected())
     {
         ui->tabsMain->setTabText(0, "Population*");
-        currentPopulation->getEpoch()[ui->listObjects->currentRow()].original_epoch = ui->leEpochOriginal->text().toDouble();
+        AuxFunctions aux;
+        OPI::JulianDay jd = OPI::fromDouble(ui->leEpochDoubleOriginal->text().toDouble());
+        ui->leEpochJDDayOriginal->setText(QString::number(jd.day));
+        ui->leEpochJDUsecOriginal->setText(QString::number(jd.usec));
+        ui->leEpochStringOriginal->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].original_epoch = jd;
     }
 }
 
-void OpiExplorerMain::on_leEpochInitial_editingFinished()
+void OpiExplorerMain::on_leEpochDoubleInitial_editingFinished()
 {
     if (validObjectSelected())
     {
         ui->tabsMain->setTabText(0, "Population*");
-        currentPopulation->getEpoch()[ui->listObjects->currentRow()].initial_epoch = ui->leEpochInitial->text().toDouble();
+        AuxFunctions aux;
+        OPI::JulianDay jd = OPI::fromDouble(ui->leEpochDoubleInitial->text().toDouble());
+        ui->leEpochJDDayInitial->setText(QString::number(jd.day));
+        ui->leEpochJDUsecInitial->setText(QString::number(jd.usec));
+        ui->leEpochStringInitial->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].initial_epoch = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochStringBOL_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = aux.dateStringToOPIJulian(ui->leEpochStringBOL->text());
+        ui->leEpochJDDayBOL->setText(QString::number(jd.day));
+        ui->leEpochJDUsecBOL->setText(QString::number(jd.usec));
+        ui->leEpochDoubleBOL->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].beginning_of_life = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochStringEOL_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = aux.dateStringToOPIJulian(ui->leEpochStringEOL->text());
+        ui->leEpochJDDayEOL->setText(QString::number(jd.day));
+        ui->leEpochJDUsecEOL->setText(QString::number(jd.usec));
+        ui->leEpochDoubleEOL->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].end_of_life = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochStringCurrent_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = aux.dateStringToOPIJulian(ui->leEpochStringCurrent->text());
+        ui->leEpochJDDayCurrent->setText(QString::number(jd.day));
+        ui->leEpochJDUsecCurrent->setText(QString::number(jd.usec));
+        ui->leEpochDoubleCurrent->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].current_epoch = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochStringOriginal_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = aux.dateStringToOPIJulian(ui->leEpochStringOriginal->text());
+        ui->leEpochJDDayOriginal->setText(QString::number(jd.day));
+        ui->leEpochJDUsecOriginal->setText(QString::number(jd.usec));
+        ui->leEpochDoubleOriginal->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].original_epoch = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochStringInitial_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = aux.dateStringToOPIJulian(ui->leEpochStringInitial->text());
+        ui->leEpochJDDayInitial->setText(QString::number(jd.day));
+        ui->leEpochJDUsecInitial->setText(QString::number(jd.usec));
+        ui->leEpochDoubleInitial->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].initial_epoch = jd;
     }
 }
 
@@ -1141,11 +1258,11 @@ void OpiExplorerMain::on_btnCopyEpoch_clicked()
     {
         QClipboard* clip = QApplication::clipboard();
         OPI::Epoch e = currentPopulation->getEpoch()[ui->listObjects->currentRow()];
-        QString text = QString::number(e.beginning_of_life,'g',precision)
-                + " " + QString::number(e.end_of_life,'g',precision)
-                + " " + QString::number(e.current_epoch,'g',precision)
-                + " " + QString::number(e.original_epoch,'g',precision)
-                + " " + QString::number(e.initial_epoch,'g',precision);
+        QString text =  QString::number(OPI::toDouble(e.beginning_of_life),'g',precision)
+                + " " + QString::number(OPI::toDouble(e.end_of_life),'g',precision)
+                + " " + QString::number(OPI::toDouble(e.current_epoch),'g',precision)
+                + " " + QString::number(OPI::toDouble(e.original_epoch),'g',precision)
+                + " " + QString::number(OPI::toDouble(e.initial_epoch),'g',precision);
         clip->setText(text);
     }
 }
@@ -1858,4 +1975,3 @@ void OpiExplorerMain::on_btnSavePlots_clicked()
         p.save(saveFile);
     }
 }
-

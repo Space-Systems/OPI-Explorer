@@ -205,7 +205,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_10">
        <attribute name="title">
@@ -220,7 +220,7 @@
           <x>400</x>
           <y>240</y>
           <width>371</width>
-          <height>321</height>
+          <height>261</height>
          </rect>
         </property>
         <property name="title">
@@ -355,9 +355,9 @@
         <widget class="QLabel" name="label_16">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>20</x>
            <y>160</y>
-           <width>141</width>
+           <width>181</width>
            <height>21</height>
           </rect>
          </property>
@@ -371,9 +371,9 @@
         <widget class="QLabel" name="label_17">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>10</x>
            <y>190</y>
-           <width>141</width>
+           <width>191</width>
            <height>21</height>
           </rect>
          </property>
@@ -387,9 +387,9 @@
         <widget class="QLabel" name="label_18">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>20</x>
            <y>220</y>
-           <width>141</width>
+           <width>181</width>
            <height>21</height>
           </rect>
          </property>
@@ -463,228 +463,6 @@
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_6">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>240</y>
-          <width>371</width>
-          <height>191</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Epoch</string>
-        </property>
-        <widget class="QLabel" name="label_20">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>60</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>End of Life [JD]</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="leEpochBOL">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>30</y>
-           <width>151</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Beginning of life date for the object, or zero for unset.</string>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="leEpochEOL">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>60</y>
-           <width>151</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>End of life date for the object, or zero for unset.
-Propagators will set EOL when an object decays and disregard it after that date.</string>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="leEpochCurrent">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>90</y>
-           <width>151</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>The epoch that this object is currently at.</string>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_19">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>30</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Beg. of Life [JD]</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_36">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>90</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Current Epoch [JD]</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnToJulianDate">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>31</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Convert dates to JD</string>
-         </property>
-         <property name="text">
-          <string>JD</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnCopyEpoch">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>31</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Copy epoch to clipboard</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="oeresource.qrc">
-           <normaloff>:/icons/clipboard.png</normaloff>:/icons/clipboard.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="leEpochOriginal">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>120</y>
-           <width>151</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>The epoch at which this dataset was created.</string>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_43">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>120</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Original Epoch [JD]</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_44">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>150</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Initial Epoch [JD]</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="leEpochInitial">
-         <property name="geometry">
-          <rect>
-           <x>210</x>
-           <y>150</y>
-           <width>151</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>The epoch at the start of propagation</string>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
          </property>
         </widget>
        </widget>
@@ -982,9 +760,9 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_11">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>20</x>
            <y>150</y>
-           <width>141</width>
+           <width>181</width>
            <height>21</height>
           </rect>
          </property>
@@ -998,9 +776,9 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_7">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>50</x>
            <y>30</y>
-           <width>141</width>
+           <width>151</width>
            <height>21</height>
           </rect>
          </property>
@@ -1143,9 +921,9 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_12">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>30</x>
            <y>180</y>
-           <width>141</width>
+           <width>171</width>
            <height>21</height>
           </rect>
          </property>
@@ -1174,7 +952,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>440</y>
+          <y>240</y>
           <width>371</width>
           <height>121</height>
          </rect>
@@ -1211,9 +989,9 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_21">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>10</x>
            <y>30</y>
-           <width>141</width>
+           <width>191</width>
            <height>21</height>
           </rect>
          </property>
@@ -1227,9 +1005,9 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_22">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>10</x>
            <y>60</y>
-           <width>141</width>
+           <width>191</width>
            <height>21</height>
           </rect>
          </property>
@@ -1243,9 +1021,9 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_23">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>10</x>
            <y>90</y>
-           <width>141</width>
+           <width>191</width>
            <height>21</height>
           </rect>
          </property>
@@ -1325,7 +1103,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
            <x>80</x>
            <y>50</y>
            <width>641</width>
-           <height>254</height>
+           <height>270</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridCovMat">
@@ -2898,6 +2676,556 @@ Propagators will set EOL when an object decays and disregard it after that date.
         </widget>
        </widget>
       </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Epoch</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>761</width>
+          <height>371</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Epoch</string>
+        </property>
+        <widget class="QLabel" name="label_20">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>100</y>
+           <width>141</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>End of Life [JD]</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochDoubleBOL">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>30</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Beginning of life date for the object, or zero for unset.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochDoubleEOL">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>100</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>End of life date for the object, or zero for unset.
+Propagators will set EOL when an object decays and disregard it after that date.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochDoubleCurrent">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>170</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch that this object is currently at.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_19">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>30</y>
+           <width>141</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Beg. of Life [JD]</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_36">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>170</y>
+           <width>151</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Current Epoch [JD]</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnToJulianDate">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Convert dates to JD</string>
+         </property>
+         <property name="text">
+          <string>JD</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnCopyEpoch">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Copy epoch to clipboard</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="oeresource.qrc">
+           <normaloff>:/icons/clipboard.png</normaloff>:/icons/clipboard.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochDoubleOriginal">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>240</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at which this dataset was created.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_43">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>240</y>
+           <width>151</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Original Epoch [JD]</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_44">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>310</y>
+           <width>141</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Initial Epoch [JD]</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochDoubleInitial">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>310</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at the start of propagation</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDDayInitial">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>310</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at the start of propagation</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDDayOriginal">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>240</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at which this dataset was created.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDDayBOL">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>30</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Beginning of life date for the object, or zero for unset.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDDayCurrent">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>170</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch that this object is currently at.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDDayEOL">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>100</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>End of life date for the object, or zero for unset.
+Propagators will set EOL when an object decays and disregard it after that date.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDUsecBOL">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>60</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Beginning of life date for the object, or zero for unset.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDUsecEOL">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>130</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>End of life date for the object, or zero for unset.
+Propagators will set EOL when an object decays and disregard it after that date.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDUsecCurrent">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>200</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch that this object is currently at.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDUsecOriginal">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>270</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at which this dataset was created.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochJDUsecInitial">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>340</y>
+           <width>151</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at the start of propagation</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochStringCurrent">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>170</y>
+           <width>201</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch that this object is currently at.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochStringEOL">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>100</y>
+           <width>201</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>End of life date for the object, or zero for unset.
+Propagators will set EOL when an object decays and disregard it after that date.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochStringBOL">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>30</y>
+           <width>201</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Beginning of life date for the object, or zero for unset.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochStringOriginal">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>240</y>
+           <width>201</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at which this dataset was created.</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="leEpochStringInitial">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>310</y>
+           <width>201</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>The epoch at the start of propagation</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhFormattedNumbersOnly</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_45">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>60</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>μs</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_46">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>130</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>μs</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_47">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>200</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>μs</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_48">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>270</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>μs</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_49">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>340</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>μs</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </widget>
+      </widget>
       <widget class="QWidget" name="tab_12">
        <attribute name="title">
         <string>Population Info</string>
@@ -3352,7 +3680,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>988</width>
+         <width>986</width>
          <height>559</height>
         </rect>
        </property>
@@ -3668,7 +3996,7 @@ If the list is empty, select a plugin folder using the main menu.</string>
      <x>0</x>
      <y>0</y>
      <width>1042</width>
-     <height>18</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -3955,15 +4283,150 @@ If the list is empty, select a plugin folder using the main menu.</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>listObjects</tabstop>
   <tabstop>tabsMain</tabstop>
-  <tabstop>leCurrentPropertyValue</tabstop>
+  <tabstop>listObjects</tabstop>
+  <tabstop>btnAddObject</tabstop>
+  <tabstop>btnDeleteObject</tabstop>
+  <tabstop>btnState2Orbit</tabstop>
+  <tabstop>btnOrbit2State</tabstop>
+  <tabstop>btnAlign</tabstop>
+  <tabstop>dtStartTime</tabstop>
+  <tabstop>dtEndTime</tabstop>
+  <tabstop>cmbDeltaT</tabstop>
+  <tabstop>cmbPropagatorMode</tabstop>
+  <tabstop>chkPlot</tabstop>
+  <tabstop>btnPropagate</tabstop>
+  <tabstop>tabObjects</tabstop>
+  <tabstop>btnCopyState</tabstop>
+  <tabstop>btnToKm</tabstop>
+  <tabstop>leStateX</tabstop>
+  <tabstop>leStateY</tabstop>
+  <tabstop>leStateZ</tabstop>
+  <tabstop>leStateXdot</tabstop>
+  <tabstop>leStateYdot</tabstop>
+  <tabstop>leStateZdot</tabstop>
+  <tabstop>leAccX</tabstop>
+  <tabstop>leAccY</tabstop>
+  <tabstop>leAccZ</tabstop>
+  <tabstop>btnCopyOrbit</tabstop>
+  <tabstop>btnToRadians</tabstop>
+  <tabstop>leOrbitSMA</tabstop>
+  <tabstop>leOrbitEcc</tabstop>
+  <tabstop>leOrbitInc</tabstop>
+  <tabstop>leOrbitRAAN</tabstop>
+  <tabstop>leOrbitAOP</tabstop>
+  <tabstop>leOrbitMA</tabstop>
+  <tabstop>btnCopyProps</tabstop>
+  <tabstop>leObjectName</tabstop>
+  <tabstop>lePropsID</tabstop>
+  <tabstop>lePropsMass</tabstop>
+  <tabstop>lePropsDia</tabstop>
+  <tabstop>lePropsA2M</tabstop>
+  <tabstop>lePropsDrag</tabstop>
+  <tabstop>lePropsReflectivity</tabstop>
+  <tabstop>btnCopyCov</tabstop>
+  <tabstop>btnToKmCov</tabstop>
+  <tabstop>leCov_0</tabstop>
+  <tabstop>leCov_8</tabstop>
+  <tabstop>leCov_9</tabstop>
+  <tabstop>leCov_16</tabstop>
+  <tabstop>leCov_17</tabstop>
+  <tabstop>leCov_18</tabstop>
+  <tabstop>leCov_24</tabstop>
+  <tabstop>leCov_25</tabstop>
+  <tabstop>leCov_26</tabstop>
+  <tabstop>leCov_27</tabstop>
+  <tabstop>leCov_32</tabstop>
+  <tabstop>leCov_33</tabstop>
+  <tabstop>leCov_34</tabstop>
+  <tabstop>leCov_35</tabstop>
+  <tabstop>leCov_36</tabstop>
+  <tabstop>leCov_40</tabstop>
+  <tabstop>leCov_41</tabstop>
+  <tabstop>leCov_42</tabstop>
+  <tabstop>leCov_43</tabstop>
+  <tabstop>leCov_44</tabstop>
+  <tabstop>leCov_45</tabstop>
+  <tabstop>leCov_48</tabstop>
+  <tabstop>leCov_49</tabstop>
+  <tabstop>leCov_50</tabstop>
+  <tabstop>leCov_51</tabstop>
+  <tabstop>leCov_52</tabstop>
+  <tabstop>leCov_53</tabstop>
+  <tabstop>leCov_54</tabstop>
+  <tabstop>leCov_56</tabstop>
+  <tabstop>leCov_57</tabstop>
+  <tabstop>leCov_58</tabstop>
+  <tabstop>leCov_59</tabstop>
+  <tabstop>leCov_60</tabstop>
+  <tabstop>leCov_61</tabstop>
+  <tabstop>leCov_62</tabstop>
+  <tabstop>leCov_63</tabstop>
+  <tabstop>leCov_1</tabstop>
+  <tabstop>leCov_2</tabstop>
+  <tabstop>leCov_3</tabstop>
+  <tabstop>leCov_4</tabstop>
+  <tabstop>leCov_5</tabstop>
+  <tabstop>leCov_6</tabstop>
+  <tabstop>leCov_7</tabstop>
+  <tabstop>leCov_10</tabstop>
+  <tabstop>leCov_11</tabstop>
+  <tabstop>leCov_12</tabstop>
+  <tabstop>leCov_13</tabstop>
+  <tabstop>leCov_14</tabstop>
+  <tabstop>leCov_15</tabstop>
+  <tabstop>leCov_19</tabstop>
+  <tabstop>leCov_20</tabstop>
+  <tabstop>leCov_21</tabstop>
+  <tabstop>leCov_22</tabstop>
+  <tabstop>leCov_23</tabstop>
+  <tabstop>leCov_28</tabstop>
+  <tabstop>leCov_29</tabstop>
+  <tabstop>leCov_30</tabstop>
+  <tabstop>leCov_31</tabstop>
+  <tabstop>leCov_37</tabstop>
+  <tabstop>leCov_38</tabstop>
+  <tabstop>leCov_39</tabstop>
+  <tabstop>leCov_46</tabstop>
+  <tabstop>leCov_47</tabstop>
+  <tabstop>leCov_55</tabstop>
+  <tabstop>teByteArray</tabstop>
+  <tabstop>btnCopyEpoch</tabstop>
+  <tabstop>btnToJulianDate</tabstop>
+  <tabstop>leEpochJDDayBOL</tabstop>
+  <tabstop>leEpochJDUsecBOL</tabstop>
+  <tabstop>leEpochJDDayEOL</tabstop>
+  <tabstop>leEpochJDUsecEOL</tabstop>
+  <tabstop>leEpochJDDayCurrent</tabstop>
+  <tabstop>leEpochJDUsecCurrent</tabstop>
+  <tabstop>leEpochJDDayOriginal</tabstop>
+  <tabstop>leEpochJDUsecOriginal</tabstop>
+  <tabstop>leEpochJDDayInitial</tabstop>
+  <tabstop>leEpochJDUsecInitial</tabstop>
+  <tabstop>leEpochDoubleBOL</tabstop>
+  <tabstop>leEpochDoubleEOL</tabstop>
+  <tabstop>leEpochDoubleCurrent</tabstop>
+  <tabstop>leEpochDoubleOriginal</tabstop>
+  <tabstop>leEpochDoubleInitial</tabstop>
+  <tabstop>leEpochStringBOL</tabstop>
+  <tabstop>leEpochStringEOL</tabstop>
+  <tabstop>leEpochStringCurrent</tabstop>
+  <tabstop>leEpochStringOriginal</tabstop>
+  <tabstop>leEpochStringInitial</tabstop>
+  <tabstop>leLastPropagator</tabstop>
+  <tabstop>leEpochEarliest</tabstop>
+  <tabstop>leEpochLatest</tabstop>
+  <tabstop>cmbRefFrame</tabstop>
+  <tabstop>teDescription</tabstop>
+  <tabstop>teReport</tabstop>
   <tabstop>listPlugins</tabstop>
   <tabstop>listPProps</tabstop>
-  <tabstop>dtStartTime</tabstop>
-  <tabstop>cmbDeltaT</tabstop>
-  <tabstop>dtEndTime</tabstop>
-  <tabstop>btnPropagate</tabstop>
+  <tabstop>leCurrentPropertyValue</tabstop>
+  <tabstop>teOpiLog</tabstop>
+  <tabstop>btnLogRefresh</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>btnClearPlot</tabstop>
+  <tabstop>btnSavePlots</tabstop>
  </tabstops>
  <resources>
   <include location="oeresource.qrc"/>
