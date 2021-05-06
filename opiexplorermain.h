@@ -148,9 +148,9 @@ private slots:
 
     void on_leOrbitMA_textChanged(const QString &arg1);
 
-    void on_leEpochBOL_textChanged(const QString &arg1);
+    void on_leEpochDoubleBOL_textChanged(const QString &arg1);
 
-    void on_leEpochEOL_textChanged(const QString &arg1);
+    void on_leEpochDoubleEOL_textChanged(const QString &arg1);
 
     void on_leObjectName_textChanged(const QString &arg1);
 
@@ -174,13 +174,13 @@ private slots:
 
     void on_leEpochDoubleCurrent_editingFinished();
 
-    void on_leEpochCurrent_textChanged(const QString &arg1);
+    void on_leEpochDoubleCurrent_textChanged(const QString &arg1);
 
     void on_btnToRadians_clicked();
 
     void on_btnCopyEpoch_clicked();
 
-    void on_btnToJulianDate_clicked();
+    //void on_btnToJulianDate_clicked();
 
     void on_actionOpen_Data_Parser_triggered();
 
@@ -281,7 +281,7 @@ private slots:
 
     void on_leEpochDoubleOriginal_editingFinished();
 
-    void on_leEpochOriginal_textChanged(const QString &arg1);
+    void on_leEpochDoubleOriginal_textChanged(const QString &arg1);
 
     void on_btnClearPlot_clicked();
 
@@ -289,7 +289,7 @@ private slots:
 
     void on_leEpochDoubleInitial_editingFinished();
 
-    void on_leEpochInitial_textChanged(const QString &arg1);
+    void on_leEpochDoubleInitial_textChanged(const QString &arg1);
 
     void on_leEpochStringBOL_editingFinished();
 
@@ -300,6 +300,26 @@ private slots:
     void on_leEpochStringOriginal_editingFinished();
 
     void on_leEpochStringInitial_editingFinished();
+
+    void on_leEpochJDDayBOL_editingFinished();
+
+    void on_leEpochJDDayEOL_editingFinished();
+
+    void on_leEpochJDDayCurrent_editingFinished();
+
+    void on_leEpochJDDayOriginal_editingFinished();
+
+    void on_leEpochJDDayInitial_editingFinished();
+
+    void on_leEpochJDUsecBOL_editingFinished();
+
+    void on_leEpochJDUsecEOL_editingFinished();
+
+    void on_leEpochJDUsecCurrent_editingFinished();
+
+    void on_leEpochJDUsecOriginal_editingFinished();
+
+    void on_leEpochJDUsecInitial_editingFinished();
 
 private:
     const int precision = 15;

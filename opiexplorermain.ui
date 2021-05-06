@@ -1060,9 +1060,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>320</y>
+          <y>340</y>
           <width>721</width>
-          <height>241</height>
+          <height>221</height>
          </rect>
         </property>
         <property name="title">
@@ -1074,7 +1074,7 @@
            <x>10</x>
            <y>30</y>
            <width>701</width>
-           <height>201</height>
+           <height>181</height>
           </rect>
          </property>
          <property name="toolTip">
@@ -1091,7 +1091,7 @@
           <x>10</x>
           <y>10</y>
           <width>721</width>
-          <height>301</height>
+          <height>321</height>
          </rect>
         </property>
         <property name="title">
@@ -2686,7 +2686,7 @@
           <x>10</x>
           <y>10</y>
           <width>761</width>
-          <height>371</height>
+          <height>411</height>
          </rect>
         </property>
         <property name="title">
@@ -2696,7 +2696,7 @@
          <property name="geometry">
           <rect>
            <x>60</x>
-           <y>100</y>
+           <y>130</y>
            <width>141</width>
            <height>21</height>
           </rect>
@@ -2712,7 +2712,7 @@
          <property name="geometry">
           <rect>
            <x>380</x>
-           <y>30</y>
+           <y>60</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2728,7 +2728,7 @@
          <property name="geometry">
           <rect>
            <x>380</x>
-           <y>100</y>
+           <y>130</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2745,7 +2745,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>380</x>
-           <y>170</y>
+           <y>200</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2760,14 +2760,14 @@ Propagators will set EOL when an object decays and disregard it after that date.
         <widget class="QLabel" name="label_19">
          <property name="geometry">
           <rect>
-           <x>60</x>
-           <y>30</y>
-           <width>141</width>
+           <x>50</x>
+           <y>60</y>
+           <width>151</width>
            <height>21</height>
           </rect>
          </property>
          <property name="text">
-          <string>Beg. of Life [JD]</string>
+          <string>Beginning of Life [JD]</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2777,7 +2777,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>50</x>
-           <y>170</y>
+           <y>200</y>
            <width>151</width>
            <height>21</height>
           </rect>
@@ -2787,28 +2787,6 @@ Propagators will set EOL when an object decays and disregard it after that date.
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btnToJulianDate">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>31</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Convert dates to JD</string>
-         </property>
-         <property name="text">
-          <string>JD</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
          </property>
         </widget>
         <widget class="QPushButton" name="btnCopyEpoch">
@@ -2841,7 +2819,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>380</x>
-           <y>240</y>
+           <y>270</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2857,7 +2835,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>50</x>
-           <y>240</y>
+           <y>270</y>
            <width>151</width>
            <height>21</height>
           </rect>
@@ -2873,7 +2851,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>60</x>
-           <y>310</y>
+           <y>340</y>
            <width>141</width>
            <height>21</height>
           </rect>
@@ -2889,7 +2867,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>380</x>
-           <y>310</y>
+           <y>340</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2905,7 +2883,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>310</y>
+           <y>340</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2921,7 +2899,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>240</y>
+           <y>270</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2937,7 +2915,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>30</y>
+           <y>60</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2953,7 +2931,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>170</y>
+           <y>200</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2969,7 +2947,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>100</y>
+           <y>130</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -2986,7 +2964,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>60</y>
+           <y>90</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -3002,7 +2980,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>130</y>
+           <y>160</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -3019,7 +2997,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>200</y>
+           <y>230</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -3035,7 +3013,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>270</y>
+           <y>300</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -3051,7 +3029,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>210</x>
-           <y>340</y>
+           <y>370</y>
            <width>151</width>
            <height>25</height>
           </rect>
@@ -3067,7 +3045,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>550</x>
-           <y>170</y>
+           <y>200</y>
            <width>201</width>
            <height>25</height>
           </rect>
@@ -3083,7 +3061,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>550</x>
-           <y>100</y>
+           <y>130</y>
            <width>201</width>
            <height>25</height>
           </rect>
@@ -3100,7 +3078,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>550</x>
-           <y>30</y>
+           <y>60</y>
            <width>201</width>
            <height>25</height>
           </rect>
@@ -3116,7 +3094,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>550</x>
-           <y>240</y>
+           <y>270</y>
            <width>201</width>
            <height>25</height>
           </rect>
@@ -3132,7 +3110,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>550</x>
-           <y>310</y>
+           <y>340</y>
            <width>201</width>
            <height>25</height>
           </rect>
@@ -3148,7 +3126,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>180</x>
-           <y>60</y>
+           <y>90</y>
            <width>21</width>
            <height>21</height>
           </rect>
@@ -3164,7 +3142,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>180</x>
-           <y>130</y>
+           <y>160</y>
            <width>21</width>
            <height>21</height>
           </rect>
@@ -3180,7 +3158,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>180</x>
-           <y>200</y>
+           <y>230</y>
            <width>21</width>
            <height>21</height>
           </rect>
@@ -3196,7 +3174,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>180</x>
-           <y>270</y>
+           <y>300</y>
            <width>21</width>
            <height>21</height>
           </rect>
@@ -3212,7 +3190,7 @@ Propagators will set EOL when an object decays and disregard it after that date.
          <property name="geometry">
           <rect>
            <x>180</x>
-           <y>340</y>
+           <y>370</y>
            <width>21</width>
            <height>21</height>
           </rect>
@@ -3222,6 +3200,54 @@ Propagators will set EOL when an object decays and disregard it after that date.
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_50">
+         <property name="geometry">
+          <rect>
+           <x>210</x>
+           <y>30</y>
+           <width>151</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>OPI::JulianDay</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_51">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>30</y>
+           <width>151</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Double Precision</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_52">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>30</y>
+           <width>151</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gregorian</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
        </widget>
@@ -4392,7 +4418,6 @@ If the list is empty, select a plugin folder using the main menu.</string>
   <tabstop>leCov_55</tabstop>
   <tabstop>teByteArray</tabstop>
   <tabstop>btnCopyEpoch</tabstop>
-  <tabstop>btnToJulianDate</tabstop>
   <tabstop>leEpochJDDayBOL</tabstop>
   <tabstop>leEpochJDUsecBOL</tabstop>
   <tabstop>leEpochJDDayEOL</tabstop>

@@ -10,7 +10,7 @@ class AuxFunctions
 {
 public:
     AuxFunctions();
-    double dateStringToJulian(QString dateString);
+    //double dateStringToJulian(QString dateString);
     //QString timeStringFromJulianDay(double julianDay);
     //QDateTime qDateTimeFromJulianDay(double julianDay);
 

@@ -1030,6 +1030,96 @@ void OpiExplorerMain::on_leEpochStringInitial_editingFinished()
     }
 }
 
+void OpiExplorerMain::on_leEpochJDDayBOL_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = {ui->leEpochJDDayBOL->text().toInt(), ui->leEpochJDUsecBOL->text().toLongLong()};
+        ui->leEpochDoubleBOL->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        ui->leEpochStringBOL->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].beginning_of_life = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochJDDayEOL_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = {ui->leEpochJDDayEOL->text().toInt(), ui->leEpochJDUsecEOL->text().toLongLong()};
+        ui->leEpochDoubleEOL->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        ui->leEpochStringEOL->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].end_of_life = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochJDDayCurrent_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = {ui->leEpochJDDayCurrent->text().toInt(), ui->leEpochJDUsecCurrent->text().toLongLong()};
+        ui->leEpochDoubleCurrent->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        ui->leEpochStringCurrent->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].current_epoch = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochJDDayOriginal_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = {ui->leEpochJDDayOriginal->text().toInt(), ui->leEpochJDUsecOriginal->text().toLongLong()};
+        ui->leEpochDoubleOriginal->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        ui->leEpochStringOriginal->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].original_epoch = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochJDDayInitial_editingFinished()
+{
+    if (validObjectSelected())
+    {
+        ui->tabsMain->setTabText(0, "Population*");
+        AuxFunctions aux;
+        OPI::JulianDay jd = {ui->leEpochJDDayInitial->text().toInt(), ui->leEpochJDUsecInitial->text().toLongLong()};
+        ui->leEpochDoubleInitial->setText(QString::number(OPI::toDouble(jd),'g',precision));
+        ui->leEpochStringInitial->setText(aux.timeStringFromJulianDay(jd));
+        currentPopulation->getEpoch()[ui->listObjects->currentRow()].initial_epoch = jd;
+    }
+}
+
+void OpiExplorerMain::on_leEpochJDUsecBOL_editingFinished()
+{
+    on_leEpochJDDayBOL_editingFinished();
+}
+
+void OpiExplorerMain::on_leEpochJDUsecEOL_editingFinished()
+{
+    on_leEpochJDDayEOL_editingFinished();
+}
+
+void OpiExplorerMain::on_leEpochJDUsecCurrent_editingFinished()
+{
+    on_leEpochJDDayCurrent_editingFinished();
+}
+
+void OpiExplorerMain::on_leEpochJDUsecOriginal_editingFinished()
+{
+    on_leEpochJDDayOriginal_editingFinished();
+}
+
+void OpiExplorerMain::on_leEpochJDUsecInitial_editingFinished()
+{
+    on_leEpochJDDayInitial_editingFinished();
+}
+
 void OpiExplorerMain::on_leAccX_editingFinished()
 {
     if (validObjectSelected())
@@ -1168,27 +1258,27 @@ void OpiExplorerMain::on_leOrbitMA_textChanged(const QString &arg1)
     pasteState(17);
 }
 
-void OpiExplorerMain::on_leEpochBOL_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leEpochDoubleBOL_textChanged(const QString &arg1)
 {
     pasteState(18);
 }
 
-void OpiExplorerMain::on_leEpochEOL_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leEpochDoubleEOL_textChanged(const QString &arg1)
 {
     pasteState(19);
 }
 
-void OpiExplorerMain::on_leEpochCurrent_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leEpochDoubleCurrent_textChanged(const QString &arg1)
 {
     pasteState(20);
 }
 
-void OpiExplorerMain::on_leEpochOriginal_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leEpochDoubleOriginal_textChanged(const QString &arg1)
 {
     pasteState(21);
 }
 
-void OpiExplorerMain::on_leEpochInitial_textChanged(const QString &arg1)
+void OpiExplorerMain::on_leEpochDoubleInitial_textChanged(const QString &arg1)
 {
     pasteState(22);
 }
@@ -1300,7 +1390,7 @@ void OpiExplorerMain::on_btnToRadians_clicked()
     }
 }
 
-
+/*
 void OpiExplorerMain::on_btnToJulianDate_clicked()
 {
     AuxFunctions aux;
@@ -1314,6 +1404,7 @@ void OpiExplorerMain::on_btnToJulianDate_clicked()
         }
     }
 }
+*/
 
 void OpiExplorerMain::on_actionOpen_Data_Parser_triggered()
 {

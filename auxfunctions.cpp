@@ -7,6 +7,7 @@ AuxFunctions::AuxFunctions()
 
 }
 
+/*
 double AuxFunctions::dateStringToJulian(QString dateString)
 {
     double julianDate = 0.0;
@@ -26,7 +27,6 @@ double AuxFunctions::dateStringToJulian(QString dateString)
     return julianDate;
 }
 
-/*
 QDateTime AuxFunctions::qDateTimeFromJulianDay(double julianDay)
 {
     qint64 jd = (qint64)(qRound(julianDay));
@@ -82,5 +82,5 @@ QDateTime AuxFunctions::qDateTimeFromJulianDay(OPI::JulianDay julianDay)
 
 QString AuxFunctions::timeStringFromJulianDay(OPI::JulianDay julianDay)
 {
-    return qDateTimeFromJulianDay(julianDay).toString("yyyy-MM-ddTHH:mm:ss");
+    return qDateTimeFromJulianDay(julianDay).toString("yyyy-MM-ddTHH:mm:ss.zzz");
 }
