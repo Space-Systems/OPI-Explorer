@@ -13,8 +13,6 @@
 #include <QDebug>
 #include <QtCharts/QLineSeries>
 
-using namespace QtCharts;
-
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -300,20 +298,20 @@ void OpiExplorerMain::pasteState(int editBoxIndex)
     }
     else {
         text = text.simplified();
-        QStringList split = text.split(",",QString::SkipEmptyParts);
-        if (split.size() <= 1) split = text.split(" ",QString::SkipEmptyParts);
+        QStringList split = text.split(",",Qt::SkipEmptyParts);
+        if (split.size() <= 1) split = text.split(" ",Qt::SkipEmptyParts);
         if (split.size() > 1)
         {
             if (editBoxIndex < 3)
             {
                 // Position
-                for (int i=0; i<std::min(6,split.size()); i++) { inputBoxes[i]->setText(split[i]); inputBoxes[i]->editingFinished(); }
+                for (int i=0; i<std::min(6,(int)split.size()); i++) { inputBoxes[i]->setText(split[i]); inputBoxes[i]->editingFinished(); }
             }
             else if (editBoxIndex < 6)
             {
                 //Velocity
                 if (split.size() == 3) for (int i=0; i<split.size(); i++) { inputBoxes[3+i]->setText(split[i]); inputBoxes[3+i]->editingFinished(); }
-                else for (int i=0; i<std::min(6,split.size()); i++) { inputBoxes[i]->setText(split[i]); inputBoxes[i]->editingFinished(); }
+                else for (int i=0; i<std::min(6,(int)split.size()); i++) { inputBoxes[i]->setText(split[i]); inputBoxes[i]->editingFinished(); }
             }
             else if (editBoxIndex >= 12 && editBoxIndex <= 17)
             {
@@ -403,7 +401,7 @@ void OpiExplorerMain::on_listObjects_currentRowChanged(int currentRow)
         for (int i=0; i<byteArraySize; i++)
         {
             char byte = currentPopulation->getBytes()[currentRow*byteArraySize+i];
-            bytes.append(QChar(byte));
+            bytes.append(byte);
         }
         ui->teByteArray->setText((bytes.toHex(' ')).toUpper());
 
@@ -1472,7 +1470,7 @@ void OpiExplorerMain::on_teDescription_textChanged()
 
 void OpiExplorerMain::on_leCov_0_textChanged(const QString &arg1)
 {
-    QStringList values = arg1.split(QRegularExpression("[ \\t\\r\\n]+"), QString::SkipEmptyParts);
+    QStringList values = arg1.split(QRegularExpression("[ \\t\\r\\n]+"), Qt::SkipEmptyParts);
     if (values.size() > 1)
     {
         for (int i=0; i<std::min(values.size(),covBoxesLowerTriangular.size()); i++)

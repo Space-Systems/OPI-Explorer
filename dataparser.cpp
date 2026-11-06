@@ -34,11 +34,12 @@ DataParser::~DataParser()
 
 void DataParser::on_btnAnalyse_clicked()
 {
-    QRegExp rx(rxFullProfile);
-    rx.indexIn(ui->cmbParseProfiles->currentText());
+    QRegularExpression rx(rxFullProfile);
+    //rx.indexIn(ui->cmbParseProfiles->currentText());
+    QRegularExpressionMatch match = rx.match(ui->cmbParseProfiles->currentText());
     //QString profileName = rx.cap(1);
-    QString separator = rx.cap(2);
-    QString parseProfile = rx.cap(3);
+    QString separator = match.captured(2);
+    QString parseProfile = match.captured(3);
 
     QStringList identifiers;
     QStringList modifiers;
@@ -75,7 +76,7 @@ void DataParser::on_btnAnalyse_clicked()
     }
 
     AuxFunctions aux;
-    QStringList lines = ui->teParsablePopulation->toPlainText().split("\n",QString::SkipEmptyParts);
+    QStringList lines = ui->teParsablePopulation->toPlainText().split("\n",Qt::SkipEmptyParts);
     if (population) delete population;
     population = new OPI::Population(*host, lines.size());
     QString parsedText;
@@ -209,10 +210,11 @@ void DataParser::on_btnSaveProfile_clicked()
 {
     QSettings settings("opi-explorer.ini", QSettings::NativeFormat);
     settings.beginGroup("ParseProfiles");
-    QRegExp rx(rxFullProfile);
+    QRegularExpression rx(rxFullProfile);
     QString profile = ui->cmbParseProfiles->currentText();
-    rx.indexIn(profile);
-    QString profileName = rx.cap(1);
+    //rx.indexIn(profile);
+    QRegularExpressionMatch match = rx.match(profile);
+    QString profileName = match.captured(1);
     if (profileName != "")
     {
         settings.setValue(profileName,profile);

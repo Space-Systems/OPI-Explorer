@@ -337,7 +337,7 @@ private:
     QVector<QLineEdit*> covBoxes;
     QVector<QLineEdit*> covBoxesLowerTriangular;
 
-    QVector<QtCharts::QChartView*> plotViews;
+    QVector<QChartView*> plotViews;
 
     void loadPlugins(QString pluginFolder);
     void pasteState(int editBoxIndex);

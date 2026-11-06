@@ -96,13 +96,13 @@ void GLCanvas::mouseMoveEvent(QMouseEvent* event)
 {
     if (event->buttons() == Qt::RightButton)
     {
-        int deltaX = event->x() - rightClickPosition.x;
+        int deltaX = event->position().x() - rightClickPosition.x;
         rotationY = fmod((float)deltaX, 360.0);
         repaint();
     }
     if (event->buttons() == Qt::MiddleButton)
     {
-        int deltaY = event->y() - middleClickPosition.y;
+        int deltaY = event->position().y() - middleClickPosition.y;
         zoom = deltaY;
         repaint();
     }
@@ -112,11 +112,11 @@ void GLCanvas::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::RightButton)
     {
-        rightClickPosition = { event->x(), event->y() };
+        rightClickPosition = { event->position().x(), event->position().y() };
     }
     if (event->button() == Qt::MiddleButton)
     {
-        middleClickPosition = { event->x(), event->y() };
+        middleClickPosition = { event->position().x(), event->position().y() };
     }
 }
 
